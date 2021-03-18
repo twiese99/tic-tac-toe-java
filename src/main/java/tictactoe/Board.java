@@ -7,16 +7,38 @@ public class Board {
 	private final LinkedHashMap<Coordinate, Character> stones = new LinkedHashMap<>();
 
 	public boolean setStone(char character, int x, int y) {
-		final Coordinate coordinate = new Coordinate(x, y);
-		if (!stones.containsKey(coordinate) && (character == 'X' || character == 'O')) {
-			stones.put(coordinate, character);
-			return true;
+		if((x >= 0 && x <= 2) && (y >= 0 && y <= 2)) {
+			final Coordinate coordinate = new Coordinate(x, y);
+			if (isFieldEmpty(coordinate)) {
+				stones.put(coordinate, character);
+				return true;
+			}
 		}
 		return false;
 	}
 
 	public boolean isWon() {
 		return (isWinner('X') || isWinner('O'));
+	}
+
+	/**
+	 * Returns true, if field is empty or filled with a Character which not equals X or O
+	 */
+	public boolean isFieldEmpty(final Coordinate coordinate) {
+		if(stones.containsKey(coordinate)) {
+			final Character character = stones.get(coordinate);
+			return !(character == 'X' || character == 'O');
+		}
+		return true;
+	}
+
+	public boolean containsFreeFields() {
+		for (int y = 0; y <= 2; y++) {
+			for (int x = 0; x <= 2; x++) {
+				if(isFieldEmpty(new Coordinate(x, y))) return true;
+			}
+		}
+		return false;
 	}
 
 	public boolean isWinner(final char character) {
