@@ -84,7 +84,7 @@ public class Board {
 			final String color = (stone == 'X') ? AnsiColor.ANSI_YELLOW : AnsiColor.ANSI_RED;
 			return color + " " + stone + " " + AnsiColor.ANSI_RESET;
 		} else {
-			return x+","+y;
+			return "   ";
 		}
 	}
 
