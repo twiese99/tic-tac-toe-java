@@ -1,0 +1,127 @@
+package tictactoe;
+
+import java.util.LinkedHashMap;
+import java.util.Objects;
+
+public class Board {
+
+	private final LinkedHashMap<Coordinate, Character> stones = new LinkedHashMap<>();
+
+	public boolean setStone(char character, int x, int y) {
+		final Coordinate coordinate = new Coordinate(x, y);
+		if(stones.containsKey(coordinate)) return true;
+		stones.put(coordinate, character);
+		return true;
+	}
+
+	public boolean isWon() {
+		return (isWinner('X') || isWinner('x') || isWinner('O') || isWinner('o'));
+	}
+
+	public boolean isWinner(final char character) {
+		// X X X
+		// - - -
+		// - - -
+		if(expectedCharNotNull(character, stone(0, 0), stone(1, 0), stone(2, 0))) return true;
+		// - - -
+		// X X X
+		// - - -
+		if(expectedCharNotNull(character, stone(0, 1), stone(1, 1), stone(2, 1))) return true;
+		// - - -
+		// - - -
+		// X X X
+		if(expectedCharNotNull(character, stone(0, 2), stone(1, 2), stone(2, 2))) return true;
+		// X - -
+		// X - -
+		// X - -
+		if(expectedCharNotNull(character, stone(0, 0), stone(0, 1), stone(0, 2))) return true;
+		// - X -
+		// - X -
+		// - X -
+		if(expectedCharNotNull(character, stone(1, 0), stone(1, 1), stone(1, 2))) return true;
+		// - - X
+		// - - X
+		// - - X
+		if(expectedCharNotNull(character, stone(2, 0), stone(2, 1), stone(2, 2))) return true;
+		// X - -
+		// - X -
+		// - - X
+		if(expectedCharNotNull(character, stone(0, 0), stone(1, 1), stone(2, 2))) return true;
+		// - - X
+		// - X -
+		// X - -
+		if(expectedCharNotNull(character, stone(2, 0), stone(1, 1), stone(0, 2))) return true;
+		// default case
+		return false;
+	}
+
+	@Override
+	public String toString() {
+		String string = "┌─────┬─────┬─────┐\n";
+		string = string + "│ " + stoneOrCoordinate(0,0) + " │ " + stoneOrCoordinate(1,0) + " │ " + stoneOrCoordinate(2,0) + " │\n";
+		string = string + "├─────┼─────┼─────┤\n";
+		string = string + "│ " + stoneOrCoordinate(0,1) + " │ " + stoneOrCoordinate(1,1) + " │ " + stoneOrCoordinate(2,1) + " │\n";
+		string = string + "├─────┼─────┼─────┤\n";
+		string = string + "│ " + stoneOrCoordinate(0,2) + " │ " + stoneOrCoordinate(1,2) + " │ " + stoneOrCoordinate(2,2) + " │\n";
+		string = string + "└─────┴─────┴─────┘";
+		return string;
+	}
+
+	/**
+	 * Just to make it more convenient; Maybe null
+	 */
+	private Character stone(int x, int y) {
+		return stones.get(new Coordinate(x, y));
+	}
+
+	/**
+	 * Returns String with Character if placed or Coordinate pattern
+	 */
+	private String stoneOrCoordinate(int x, int y) {
+		final Character stone = stone(x, y);
+		if(stone != null) {
+			return " " + stone + " ";
+		} else {
+			return x+","+y;
+		}
+	}
+
+	private boolean expectedCharNotNull(final Character expected, final Character char1, final Character char2, final Character char3) {
+		if(expected == null) return false;
+		return (expected == char1) && (expected == char2) && (expected == char3);
+	}
+
+
+	public static class Coordinate {
+
+		private final int x;
+		private final int y;
+
+		public Coordinate(int x, int y) {
+			this.x = x;
+			this.y = y;
+		}
+
+		public int getX() {
+			return x;
+		}
+
+		public int getY() {
+			return y;
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) return true;
+			if (!(o instanceof Coordinate)) return false;
+			Coordinate that = (Coordinate) o;
+			return getX() == that.getX() && getY() == that.getY();
+		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(getX(), getY());
+		}
+	}
+
+}
