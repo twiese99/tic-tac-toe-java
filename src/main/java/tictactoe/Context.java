@@ -7,7 +7,7 @@ public class Context {
 	private Action splash;
 	private Action xTurn;
 	private Action oTurn;
-	private Action ende;
+	private Action end;
 	private Action currentState;
 	private Board board;
 	
@@ -16,7 +16,7 @@ public class Context {
 		this.splash = new Splash(this);
 		this.xTurn = new XTurn(this);
 		this.oTurn = new OTurn(this);
-		this.ende = new Ende(this);
+		this.end = new End(this);
 		this.board = new Board();
 
 		this.currentState = this.getSplash();
@@ -42,8 +42,8 @@ public class Context {
 	}
 
 
-	public Action getEnde() {
-		return this.ende;
+	public Action getEnd() {
+		return this.end;
 	}
 
 	public Board getBoard() {
@@ -56,9 +56,9 @@ public class Context {
 
 	
 	public static void main(String[] args) {
-		
 		// Startbildschirm
 		Context context = new Context();
+		context.setCurrentState(context.getSplash());
 
 		Scanner scanner = new Scanner(System.in);
         while (true){
