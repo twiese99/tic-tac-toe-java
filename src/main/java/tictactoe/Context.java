@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class Context {
 
-	private Aktion splash;
-	private Aktion xTurn;
-	private Aktion oTurn;
-	private Aktion ende;
-	private Aktion currentState;
+	private Action splash;
+	private Action xTurn;
+	private Action oTurn;
+	private Action ende;
+	private Action currentState;
 	private Board board;
 	
 	
@@ -22,28 +22,27 @@ public class Context {
 		this.currentState = this.getSplash();
 	}
 
-
-	public void setCurrentState(Aktion s) {
+	public void setCurrentState(Action s) {
 		this.currentState = s;
 		System.out.println(s.getScreen());
 	}
 
-	public Aktion getSplash() {
+	public Action getSplash() {
 		return this.splash;
 	}
 
 
-	public Aktion getXTurn() {
+	public Action getXTurn() {
 		return this.xTurn;
 	}
 
 
-	public Aktion getOTurn() {
+	public Action getOTurn() {
 		return this.oTurn;
 	}
 
 
-	public Aktion getEnde() {
+	public Action getEnde() {
 		return this.ende;
 	}
 
