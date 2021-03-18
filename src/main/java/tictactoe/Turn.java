@@ -54,7 +54,7 @@ public abstract class Turn implements Action {
         if (shouldStartNextTurn) {
             if (setStone()) {
                 resetCoordinates();
-                if (context.getBoard().isWon()) {
+                if (context.getBoard().isWon() || !context.getBoard().containsFreeFields()) {
                     context.setCurrentState(context.getEnd());
                 } else {
                     nextTurn();

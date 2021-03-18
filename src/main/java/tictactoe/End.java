@@ -9,13 +9,16 @@ public class End implements Action {
 
 	@Override
 	public void keyPressed(char c) {
+		context.getBoard().clear();
 		context.setCurrentState(context.getSplash());
 	}
 
 	@Override
 	public String getScreen() {
-		String winner = "X";
-		if (context.getBoard().isWinner('O')) {
+		String winner = "NOBODY";
+		if (context.getBoard().isWinner('X')) {
+			winner = "X";
+		} else if (context.getBoard().isWinner('O')) {
 			winner = "O";
 		}
 		String result = "";
