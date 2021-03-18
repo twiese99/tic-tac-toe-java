@@ -1,18 +1,29 @@
 package tictactoe;
 
-public class OTurn implements Aktion {
-
-	private Context context;
-
-	public OTurn(Context c) {
-		
+public class OTurn extends Turn {
+	public OTurn(Context context) {
+		super(context);
 	}
-	
-	public void keyPressed(char c) {
-		
+
+	@Override
+	public String getScreen() {
+		String result = "";
+
+		if (isNewTurn()) {
+			result += "[ O ist am Zug ]\n";
+		}
+
+		result += super.getScreen();
+		return result;
 	}
-	
-	public void numPressed(int i) {
-		
+
+	@Override
+	protected void nextTurn() {
+		context.setCurrentState(context.getXTurn());
+	}
+
+	@Override
+	protected boolean setStone() {
+		return context.getBoard().setStone('O', xCoordinate, yCoordinate);
 	}
 }

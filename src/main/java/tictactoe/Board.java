@@ -90,6 +90,10 @@ public class Board {
 		return string;
 	}
 
+	public void clear() {
+		stones.clear();
+	}
+
 	/**
 	 * Just to make it more convenient; Maybe null
 	 */
@@ -106,7 +110,7 @@ public class Board {
 			final String color = (stone == 'X') ? AnsiColor.ANSI_YELLOW : AnsiColor.ANSI_RED;
 			return color + " " + stone + " " + AnsiColor.ANSI_RESET;
 		} else {
-			return x+","+y;
+			return "   ";
 		}
 	}
 

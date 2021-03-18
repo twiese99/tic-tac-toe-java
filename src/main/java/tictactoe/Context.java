@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class Context {
 
-	private Aktion splash;
-	private Aktion xTurn;
-	private Aktion oTurn;
-	private Aktion ende;
-	private Aktion currentState;
+	private Action splash;
+	private Action xTurn;
+	private Action oTurn;
+	private Action end;
+	private Action currentState;
 	private Board board;
 	
 	
@@ -16,35 +16,34 @@ public class Context {
 		this.splash = new Splash(this);
 		this.xTurn = new XTurn(this);
 		this.oTurn = new OTurn(this);
-		this.ende = new Ende(this);
+		this.end = new End(this);
 		this.board = new Board();
 
 		this.currentState = this.getSplash();
 	}
 
-
-	public void setCurrentState(Aktion s) {
+	public void setCurrentState(Action s) {
 		this.currentState = s;
 		System.out.println(s.getScreen());
 	}
 
-	public Aktion getSplash() {
+	public Action getSplash() {
 		return this.splash;
 	}
 
 
-	public Aktion getXTurn() {
+	public Action getXTurn() {
 		return this.xTurn;
 	}
 
 
-	public Aktion getOTurn() {
+	public Action getOTurn() {
 		return this.oTurn;
 	}
 
 
-	public Aktion getEnde() {
-		return this.ende;
+	public Action getEnd() {
+		return this.end;
 	}
 
 	public Board getBoard() {
@@ -57,9 +56,9 @@ public class Context {
 
 	
 	public static void main(String[] args) {
-		
 		// Startbildschirm
 		Context context = new Context();
+		context.setCurrentState(context.getSplash());
 
 		Scanner scanner = new Scanner(System.in);
         while (true){
