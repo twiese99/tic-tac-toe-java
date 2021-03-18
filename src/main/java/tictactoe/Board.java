@@ -8,13 +8,15 @@ public class Board {
 
 	public boolean setStone(char character, int x, int y) {
 		final Coordinate coordinate = new Coordinate(x, y);
-		if(stones.containsKey(coordinate)) return true;
-		stones.put(coordinate, character);
-		return true;
+		if (!stones.containsKey(coordinate) && (character == 'X' || character == 'O')) {
+			stones.put(coordinate, character);
+			return true;
+		}
+		return false;
 	}
 
 	public boolean isWon() {
-		return (isWinner('X') || isWinner('x') || isWinner('O') || isWinner('o'));
+		return (isWinner('X') || isWinner('O'));
 	}
 
 	public boolean isWinner(final char character) {
@@ -79,7 +81,8 @@ public class Board {
 	private String stoneOrCoordinate(int x, int y) {
 		final Character stone = stone(x, y);
 		if(stone != null) {
-			return " " + stone + " ";
+			final String color = (stone == 'X') ? AnsiColor.ANSI_YELLOW : AnsiColor.ANSI_RED;
+			return color + " " + stone + " " + AnsiColor.ANSI_RESET;
 		} else {
 			return x+","+y;
 		}
