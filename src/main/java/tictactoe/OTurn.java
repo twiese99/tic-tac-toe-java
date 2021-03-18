@@ -7,7 +7,12 @@ public class OTurn extends Turn {
 
 	@Override
 	public String getScreen() {
-		String result = "[ O ist am Zug ]\n\n";
+		String result = "";
+
+		if (isNewTurn()) {
+			result += "[ O ist am Zug ]\n";
+		}
+
 		result += super.getScreen();
 		return result;
 	}

@@ -4,8 +4,8 @@ public abstract class Turn implements Action {
     protected Context context;
     protected boolean shouldStartNextTurn;
 
-    Integer xCoordinate;
-    Integer yCoordinate;
+    protected Integer xCoordinate;
+    protected Integer yCoordinate;
 
     Turn(Context context) {
         this.context = context;
@@ -13,8 +13,12 @@ public abstract class Turn implements Action {
 
     @Override
     public String getScreen() {
-        String result = context.getBoard().toString();
-        result += "\n";
+        String result = "";
+
+        if (isNewTurn()) {
+            result += context.getBoard().toString();
+            result += "\n";
+        }
 
         String wantedCoordinate = "";
         if (xCoordinate == null) {
@@ -23,7 +27,7 @@ public abstract class Turn implements Action {
             wantedCoordinate = "Reihe";
         }
 
-        result += "\nBitte " + wantedCoordinate + " eingeben. 1 bis 3 erlaubt, ungültige Eingaben => Abbruch";
+        result += "Bitte " + wantedCoordinate + " eingeben. 1 bis 3 erlaubt, ungültige Eingaben => Abbruch";
         return result;
     }
 
@@ -41,20 +45,20 @@ public abstract class Turn implements Action {
                 }
             }
         } else {
-            xCoordinate = null;
-            yCoordinate = null;
+            resetCoordinates();
         }
         changeState();
     }
 
     protected void changeState() {
-        if (context.getBoard().isWon()) {
-            context.setCurrentState(context.getEnd());
-        } else if (shouldStartNextTurn) {
+        if (shouldStartNextTurn) {
             if (setStone()) {
-                xCoordinate = null;
-                yCoordinate = null;
-                nextTurn();
+                resetCoordinates();
+                if (context.getBoard().isWon()) {
+                    context.setCurrentState(context.getEnd());
+                } else {
+                    nextTurn();
+                }
             } else {
                 System.out.println(
                     "[ WARNUNG ] Ungültiger Spielzug! Das Feld bei Spalte " +
@@ -64,11 +68,21 @@ public abstract class Turn implements Action {
                     " ist bereits belegt."
                 );
                 shouldStartNextTurn = false;
+                resetCoordinates();
                 changeState();
             }
         } else {
             context.setCurrentState(this);
         }
+    }
+
+    private void resetCoordinates() {
+        xCoordinate = null;
+        yCoordinate = null;
+    }
+
+    protected boolean isNewTurn() {
+        return (xCoordinate == null);
     }
 
     protected abstract void nextTurn();
