@@ -17,8 +17,8 @@ public class Context {
 		this.xTurn = new XTurn(this);
 		this.oTurn = new OTurn(this);
 		this.ende = new Ende(this);
-		this.board = new World();
-		
+		this.board = new Board();
+
 		this.currentState = this.getSplash();
 	}
 
@@ -54,19 +54,19 @@ public class Context {
 	public void keyPressed(char c) {
 		this.currentState.keyPressed(c);
 	}
-	
+
 	
 	public static void main(String[] args) {
 		
 		// Startbildschirm
 		Context context = new Context();
-		
+
 		Scanner scanner = new Scanner(System.in);
         while (true){
             String s = scanner.next();
             context.keyPressed(s.charAt(0));
         }
-		
+
 	}
-	
+
 }
