@@ -20,11 +20,16 @@ public class Context {
 		this.board = new Board();
 
 		this.currentState = this.getSplash();
+		printScreen();
 	}
 
 	public void setCurrentState(Action state) {
 		this.currentState = state;
-		System.out.println(state.getScreen());
+		printScreen();
+	}
+
+	private void printScreen() {
+		System.out.println(currentState.getScreen());
 	}
 
 	public Action getSplash() {
@@ -58,7 +63,6 @@ public class Context {
 	public static void main(String[] args) {
 		// Startbildschirm
 		Context context = new Context();
-		context.setCurrentState(context.getSplash());
 
 		Scanner scanner = new Scanner(System.in);
         while (true) {
