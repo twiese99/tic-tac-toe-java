@@ -47,9 +47,3 @@ public final class Resources {
         public static final char PlayerO = 'O';
     }
 }
-/*
-Created Resources.java
-moved AnsiColor to Resources
-added AnsiArt for splash and end screen
-added PlayerSymbol to centralize player's symbols and prevent errors
- */
