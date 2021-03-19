@@ -16,10 +16,10 @@ public class End implements Action {
 	@Override
 	public String getScreen() {
 		String winner = "NOBODY";
-		if (context.getBoard().isWinner('X')) {
-			winner = "X";
-		} else if (context.getBoard().isWinner('O')) {
-			winner = "O";
+		if (context.getBoard().isWinner(Resources.PlayerSymbol.PlayerX)) {
+			winner = Character.toString(Resources.PlayerSymbol.PlayerX);
+		} else if (context.getBoard().isWinner(Resources.PlayerSymbol.PlayerO)) {
+			winner = Character.toString(Resources.PlayerSymbol.PlayerO);
 		}
 		String result = "";
 
@@ -27,17 +27,7 @@ public class End implements Action {
 		result += "\n";
 		result += "[ THE WINNER IS " + winner + " ]\n";
 		result += "\n";
-		result += " $$$$$$\\                                           $$$$$$\\                                 \n";
-		result += "$$  __$$\\                                         $$  __$$\\                                \n";
-		result += "$$ /  \\__| $$$$$$\\  $$$$$$\\$$$$\\   $$$$$$\\        $$ /  $$ |$$\\    $$\\  $$$$$$\\   $$$$$$\\  \n";
-		result += "$$ |$$$$\\  \\____$$\\ $$  _$$  _$$\\ $$  __$$\\       $$ |  $$ |\\$$\\  $$  |$$  __$$\\ $$  __$$\\ \n";
-		result += "$$ |\\_$$ | $$$$$$$ |$$ / $$ / $$ |$$$$$$$$ |      $$ |  $$ | \\$$\\$$  / $$$$$$$$ |$$ |  \\__|\n";
-		result += "$$ |  $$ |$$  __$$ |$$ | $$ | $$ |$$   ____|      $$ |  $$ |  \\$$$  /  $$   ____|$$ |      \n";
-		result += "\\$$$$$$  |\\$$$$$$$ |$$ | $$ | $$ |\\$$$$$$$\\        $$$$$$  |   \\$  /   \\$$$$$$$\\ $$ |      \n";
-		result += " \\______/  \\_______|\\__| \\__| \\__| \\_______|       \\______/     \\_/     \\_______|\\__|      \n";
-		result += "                                                                                           \n";
-		result += "                                     [ PRESS ANY KEY ]                                     \n";
-		result += "                                                                                           ";
+		result += Resources.AnsiArt.GAME_OVER;
 
 		return result;
 	}
