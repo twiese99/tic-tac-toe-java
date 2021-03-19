@@ -7,7 +7,6 @@
     <groupId>de.mmbbs.fiae18j</groupId>
     <artifactId>tic-tac-toe</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -42,6 +41,14 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>15</source>
+                    <target>15</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>

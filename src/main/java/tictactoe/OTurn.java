@@ -24,6 +24,6 @@ public class OTurn extends Turn {
 
 	@Override
 	protected boolean setStone() {
-		return context.getBoard().setStone('O', xCoordinate, yCoordinate);
+		return context.getBoard().setStone(Resources.PlayerSymbol.PlayerO, xCoordinate, yCoordinate);
 	}
 }

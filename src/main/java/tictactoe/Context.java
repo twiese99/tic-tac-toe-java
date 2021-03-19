@@ -3,13 +3,13 @@ package tictactoe;
 import java.util.Scanner;
 
 public class Context {
-	private Action splash;
-	private Action xTurn;
-	private Action oTurn;
-	private Action end;
+	private final Action splash;
+	private final Action xTurn;
+	private final Action oTurn;
+	private final Action end;
 	private Action currentState;
-	private Board board;
-
+	private final Board board;
+  
 	public boolean running = true;
 	
 	public Context() {
@@ -20,11 +20,16 @@ public class Context {
 		this.board = new Board();
 
 		this.currentState = this.getSplash();
+		printScreen();
 	}
 
-	public void setCurrentState(Action s) {
-		this.currentState = s;
-		System.out.println(s.getScreen());
+	public void setCurrentState(Action state) {
+		this.currentState = state;
+		printScreen();
+	}
+
+	private void printScreen() {
+		System.out.println(currentState.getScreen());
 	}
 
 	public Action getSplash() {
@@ -56,9 +61,7 @@ public class Context {
 
 	
 	public static void main(String[] args) {
-		// Startbildschirm
-		Context context = new Context();
-		context.setCurrentState(context.getSplash());
+		final Context context = new Context();
 
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			@Override
@@ -72,7 +75,5 @@ public class Context {
             String s = scanner.next();
             context.keyPressed(s.charAt(0));
         }
-
 	}
-
 }

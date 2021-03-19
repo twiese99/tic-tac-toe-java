@@ -24,6 +24,6 @@ public class XTurn extends Turn {
 
 	@Override
 	protected boolean setStone() {
-		return context.getBoard().setStone('X', xCoordinate, yCoordinate);
+		return context.getBoard().setStone(Resources.PlayerSymbol.PlayerX, xCoordinate, yCoordinate);
 	}
 }

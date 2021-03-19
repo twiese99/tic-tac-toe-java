@@ -18,7 +18,7 @@ public class Board {
 	}
 
 	public boolean isWon() {
-		return (isWinner('X') || isWinner('O'));
+		return (isWinner(Resources.PlayerSymbol.PlayerX) || isWinner(Resources.PlayerSymbol.PlayerO));
 	}
 
 	/**
@@ -27,7 +27,7 @@ public class Board {
 	public boolean isFieldEmpty(final Coordinate coordinate) {
 		if(stones.containsKey(coordinate)) {
 			final Character character = stones.get(coordinate);
-			return !(character == 'X' || character == 'O');
+			return !(character == Resources.PlayerSymbol.PlayerX || character == Resources.PlayerSymbol.PlayerO);
 		}
 		return true;
 	}
@@ -81,11 +81,11 @@ public class Board {
 	@Override
 	public String toString() {
 		String string = "┌─────┬─────┬─────┐\n";
-		string = string + "│ " + stoneOrCoordinate(0,0) + " │ " + stoneOrCoordinate(1,0) + " │ " + stoneOrCoordinate(2,0) + " │\n";
+		string = string + "│ " + stoneOrEmpty(0,0) + " │ " + stoneOrEmpty(1,0) + " │ " + stoneOrEmpty(2,0) + " │\n";
 		string = string + "├─────┼─────┼─────┤\n";
-		string = string + "│ " + stoneOrCoordinate(0,1) + " │ " + stoneOrCoordinate(1,1) + " │ " + stoneOrCoordinate(2,1) + " │\n";
+		string = string + "│ " + stoneOrEmpty(0,1) + " │ " + stoneOrEmpty(1,1) + " │ " + stoneOrEmpty(2,1) + " │\n";
 		string = string + "├─────┼─────┼─────┤\n";
-		string = string + "│ " + stoneOrCoordinate(0,2) + " │ " + stoneOrCoordinate(1,2) + " │ " + stoneOrCoordinate(2,2) + " │\n";
+		string = string + "│ " + stoneOrEmpty(0,2) + " │ " + stoneOrEmpty(1,2) + " │ " + stoneOrEmpty(2,2) + " │\n";
 		string = string + "└─────┴─────┴─────┘";
 		return string;
 	}
@@ -102,13 +102,13 @@ public class Board {
 	}
 
 	/**
-	 * Returns String with Character if placed or Coordinate pattern
+	 * Returns String with Character if placed or 3 empty whitespaces
 	 */
-	private String stoneOrCoordinate(int x, int y) {
+	private String stoneOrEmpty(int x, int y) {
 		final Character stone = stone(x, y);
 		if(stone != null) {
-			final String color = (stone == 'X') ? AnsiColor.ANSI_YELLOW : AnsiColor.ANSI_RED;
-			return color + " " + stone + " " + AnsiColor.ANSI_RESET;
+			final String color = (stone == Resources.PlayerSymbol.PlayerX) ? Resources.AnsiColor.YELLOW : Resources.AnsiColor.RED;
+			return color + " " + stone + " " + Resources.AnsiColor.RESET;
 		} else {
 			return "   ";
 		}
