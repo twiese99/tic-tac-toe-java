@@ -2,7 +2,6 @@ package tictactoe;
 
 public abstract class Turn implements Action {
     protected Context context;
-    protected boolean shouldStartNextTurn;
 
     protected Integer xCoordinate;
     protected Integer yCoordinate;
@@ -33,16 +32,10 @@ public abstract class Turn implements Action {
 
     @Override
     public void keyPressed(char c) {
-        shouldStartNextTurn = false;
         if (Character.isDigit(c)) {
             int inputCoordinate = Character.getNumericValue(c) - 1;
             if (isCoordinateInRange(inputCoordinate)) {
-                if (xCoordinate == null) {
-                    xCoordinate = inputCoordinate;
-                } else if (yCoordinate == null) {
-                    yCoordinate = inputCoordinate;
-                    shouldStartNextTurn = true;
-                }
+                updateCoordinate(inputCoordinate);
             }
         } else {
             resetCoordinates();
@@ -50,11 +43,19 @@ public abstract class Turn implements Action {
         changeState();
     }
 
+    private void updateCoordinate(int inputCoordinate) {
+        if (xCoordinate == null) {
+            xCoordinate = inputCoordinate;
+        } else if (yCoordinate == null) {
+            yCoordinate = inputCoordinate;
+        }
+    }
+
     protected void changeState() {
-        if (shouldStartNextTurn) {
+        if (shouldStartNextTurn()) {
             if (setStone()) {
                 resetCoordinates();
-                if (context.getBoard().isWon() || !context.getBoard().containsFreeFields()) {
+                if (isGameOver()) {
                     context.setCurrentState(context.getEnd());
                 } else {
                     nextTurn();
@@ -67,7 +68,6 @@ public abstract class Turn implements Action {
                     (yCoordinate + 1) +
                     " ist bereits belegt."
                 );
-                shouldStartNextTurn = false;
                 resetCoordinates();
                 changeState();
             }
@@ -79,6 +79,17 @@ public abstract class Turn implements Action {
     private void resetCoordinates() {
         xCoordinate = null;
         yCoordinate = null;
+    }
+
+    private boolean shouldStartNextTurn() {
+        if (xCoordinate == null || yCoordinate == null) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isGameOver() {
+        return context.getBoard().isWon() || !context.getBoard().containsFreeFields();
     }
 
     protected boolean isNewTurn() {
