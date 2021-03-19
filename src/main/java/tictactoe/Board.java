@@ -81,11 +81,11 @@ public class Board {
 	@Override
 	public String toString() {
 		String string = "┌─────┬─────┬─────┐\n";
-		string = string + "│ " + stoneOrCoordinate(0,0) + " │ " + stoneOrCoordinate(1,0) + " │ " + stoneOrCoordinate(2,0) + " │\n";
+		string = string + "│ " + stoneOrEmpty(0,0) + " │ " + stoneOrEmpty(1,0) + " │ " + stoneOrEmpty(2,0) + " │\n";
 		string = string + "├─────┼─────┼─────┤\n";
-		string = string + "│ " + stoneOrCoordinate(0,1) + " │ " + stoneOrCoordinate(1,1) + " │ " + stoneOrCoordinate(2,1) + " │\n";
+		string = string + "│ " + stoneOrEmpty(0,1) + " │ " + stoneOrEmpty(1,1) + " │ " + stoneOrEmpty(2,1) + " │\n";
 		string = string + "├─────┼─────┼─────┤\n";
-		string = string + "│ " + stoneOrCoordinate(0,2) + " │ " + stoneOrCoordinate(1,2) + " │ " + stoneOrCoordinate(2,2) + " │\n";
+		string = string + "│ " + stoneOrEmpty(0,2) + " │ " + stoneOrEmpty(1,2) + " │ " + stoneOrEmpty(2,2) + " │\n";
 		string = string + "└─────┴─────┴─────┘";
 		return string;
 	}
@@ -102,9 +102,9 @@ public class Board {
 	}
 
 	/**
-	 * Returns String with Character if placed or Coordinate pattern
+	 * Returns String with Character if placed or 3 empty whitespaces
 	 */
-	private String stoneOrCoordinate(int x, int y) {
+	private String stoneOrEmpty(int x, int y) {
 		final Character stone = stone(x, y);
 		if(stone != null) {
 			final String color = (stone == 'X') ? AnsiColor.ANSI_YELLOW : AnsiColor.ANSI_RED;
