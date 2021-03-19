@@ -36,7 +36,7 @@ public class End implements Action {
 		result += "\\$$$$$$  |\\$$$$$$$ |$$ | $$ | $$ |\\$$$$$$$\\        $$$$$$  |   \\$  /   \\$$$$$$$\\ $$ |      \n";
 		result += " \\______/  \\_______|\\__| \\__| \\__| \\_______|       \\______/     \\_/     \\_______|\\__|      \n";
 		result += "                                                                                           \n";
-		result += "                                     [ PRESS ANY KEY ]                                     \n";
+		result += "                             [ PRESS ENTER KEY TO RESTART ]                             \n";
 		result += "                                                                                           ";
 
 		return result;

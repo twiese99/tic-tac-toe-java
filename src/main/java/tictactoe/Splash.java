@@ -23,7 +23,7 @@ public class Splash implements Action {
 		result += "   $$ |   $$ |\\$$$$$$$\\         $$ |\\$$$$$$$ |\\$$$$$$$\\         $$ |\\$$$$$$  |\\$$$$$$$\\ \n";
 		result += "   \\__|   \\__| \\_______|        \\__| \\_______| \\_______|        \\__| \\______/  \\_______|\n";
 		result += "                                                                                        \n";
-		result += "                                   [ PRESS ANY KEY ]                                   \n";
+		result += "                              [ PRESS ENTER KEY TO START]                              \n";
 		result += "                                                                                        ";
 
 		return result;

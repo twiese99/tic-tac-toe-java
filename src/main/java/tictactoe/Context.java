@@ -57,13 +57,14 @@ public class Context {
 	
 	public static void main(String[] args) {
 		// Startbildschirm
-		Context context = new Context();
+		final Context context = new Context();
 		context.setCurrentState(context.getSplash());
 
-		Scanner scanner = new Scanner(System.in);
+		final Scanner scanner = new Scanner(System.in);
         while (true){
-            String s = scanner.next();
-            context.keyPressed(s.charAt(0));
+            String line = scanner.nextLine();
+            line = line.isEmpty() ? " " : line;
+            context.keyPressed(line.charAt(0));
         }
 
 	}
