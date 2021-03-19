@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 public class Context {
 
-	private Action splash;
-	private Action xTurn;
-	private Action oTurn;
-	private Action end;
+	private final Action splash;
+	private final Action xTurn;
+	private final Action oTurn;
+	private final Action end;
 	private Action currentState;
-	private Board board;
+	private final Board board;
 	
 	
 	public Context() {
@@ -61,7 +61,7 @@ public class Context {
 		context.setCurrentState(context.getSplash());
 
 		Scanner scanner = new Scanner(System.in);
-        while (true){
+        while (true) {
             String s = scanner.next();
             context.keyPressed(s.charAt(0));
         }
