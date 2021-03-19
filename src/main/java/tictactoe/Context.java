@@ -22,9 +22,9 @@ public class Context {
 		this.currentState = this.getSplash();
 	}
 
-	public void setCurrentState(Action s) {
-		this.currentState = s;
-		System.out.println(s.getScreen());
+	public void setCurrentState(Action state) {
+		this.currentState = state;
+		System.out.println(state.getScreen());
 	}
 
 	public Action getSplash() {
