@@ -3,14 +3,14 @@ package tictactoe;
 import java.util.Scanner;
 
 public class Context {
-
 	private Action splash;
 	private Action xTurn;
 	private Action oTurn;
 	private Action end;
 	private Action currentState;
 	private Board board;
-	
+
+	public boolean running = true;
 	
 	public Context() {
 		this.splash = new Splash(this);
@@ -60,8 +60,15 @@ public class Context {
 		Context context = new Context();
 		context.setCurrentState(context.getSplash());
 
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			@Override
+			public void run() {
+				context.running = false;
+			}
+		});
+
 		Scanner scanner = new Scanner(System.in);
-        while (true){
+        while (context.running){
             String s = scanner.next();
             context.keyPressed(s.charAt(0));
         }
