@@ -36,7 +36,7 @@ public abstract class Turn implements Action {
         shouldStartNextTurn = false;
         if (Character.isDigit(c)) {
             int inputCoordinate = Character.getNumericValue(c) - 1;
-            if (isCoordinateInRange(inputCoordinate)) {
+            if (Board.isValidXorY(inputCoordinate)) {
                 if (xCoordinate == null) {
                     xCoordinate = inputCoordinate;
                 } else if (yCoordinate == null) {
@@ -88,8 +88,4 @@ public abstract class Turn implements Action {
     protected abstract void nextTurn();
 
     protected abstract boolean setStone();
-
-    private boolean isCoordinateInRange(int coordinate) {
-        return (coordinate >= 0 && coordinate <= 2);
-    }
 }
