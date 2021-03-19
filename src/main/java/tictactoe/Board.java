@@ -18,7 +18,7 @@ public class Board {
 	}
 
 	public boolean isWon() {
-		return (isWinner('X') || isWinner('O'));
+		return (isWinner(Resources.PlayerSymbol.PlayerX) || isWinner(Resources.PlayerSymbol.PlayerO));
 	}
 
 	/**
@@ -27,7 +27,7 @@ public class Board {
 	public boolean isFieldEmpty(final Coordinate coordinate) {
 		if(stones.containsKey(coordinate)) {
 			final Character character = stones.get(coordinate);
-			return !(character == 'X' || character == 'O');
+			return !(character == Resources.PlayerSymbol.PlayerX || character == Resources.PlayerSymbol.PlayerO);
 		}
 		return true;
 	}
@@ -107,8 +107,8 @@ public class Board {
 	private String stoneOrCoordinate(int x, int y) {
 		final Character stone = stone(x, y);
 		if(stone != null) {
-			final String color = (stone == 'X') ? AnsiColor.ANSI_YELLOW : AnsiColor.ANSI_RED;
-			return color + " " + stone + " " + AnsiColor.ANSI_RESET;
+			final String color = (stone == Resources.PlayerSymbol.PlayerX) ? Resources.AnsiColor.YELLOW : Resources.AnsiColor.RED;
+			return color + " " + stone + " " + Resources.AnsiColor.RESET;
 		} else {
 			return "   ";
 		}
