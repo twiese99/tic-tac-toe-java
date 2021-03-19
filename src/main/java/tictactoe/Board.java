@@ -8,7 +8,7 @@ public class Board {
 	private final LinkedHashMap<Coordinate, Character> stones = new LinkedHashMap<>();
 
 	public boolean setStone(char character, int x, int y) {
-		if((x >= 0 && x <= 2) && (y >= 0 && y <= 2)) {
+		if(isValidCoordinate(x, y)) {
 			final Coordinate coordinate = new Coordinate(x, y);
 			if (isFieldEmpty(coordinate)) {
 				stones.put(coordinate, character);
@@ -17,6 +17,15 @@ public class Board {
 		}
 		return false;
 	}
+
+	public static boolean isValidCoordinate(int x, int y) {
+		return isValidXorY(x) && isValidXorY(y);
+	}
+	
+	public static boolean isValidXorY(int XorY) {
+		return (XorY >= 0 && XorY <= 2);
+	}
+	
 
 	public boolean isWon() {
 		return (isWinner(Resources.PlayerSymbol.PlayerX) || isWinner(Resources.PlayerSymbol.PlayerO));
