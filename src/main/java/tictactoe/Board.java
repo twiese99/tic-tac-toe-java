@@ -1,5 +1,6 @@
 package tictactoe;
 
+import java.text.MessageFormat;
 import java.util.LinkedHashMap;
 
 public class Board {
@@ -80,14 +81,11 @@ public class Board {
 
 	@Override
 	public String toString() {
-		String string = "┌─────┬─────┬─────┐\n";
-		string = string + "│ " + stoneOrEmpty(0,0) + " │ " + stoneOrEmpty(1,0) + " │ " + stoneOrEmpty(2,0) + " │\n";
-		string = string + "├─────┼─────┼─────┤\n";
-		string = string + "│ " + stoneOrEmpty(0,1) + " │ " + stoneOrEmpty(1,1) + " │ " + stoneOrEmpty(2,1) + " │\n";
-		string = string + "├─────┼─────┼─────┤\n";
-		string = string + "│ " + stoneOrEmpty(0,2) + " │ " + stoneOrEmpty(1,2) + " │ " + stoneOrEmpty(2,2) + " │\n";
-		string = string + "└─────┴─────┴─────┘";
-		return string;
+		return MessageFormat.format(Resources.AnsiArt.BOARD,
+				stoneOrEmpty(0,0), stoneOrEmpty(1,0), stoneOrEmpty(2,0),
+				stoneOrEmpty(0,1), stoneOrEmpty(1,1), stoneOrEmpty(2,1),
+				stoneOrEmpty(0,2), stoneOrEmpty(1,2), stoneOrEmpty(2,2)
+		);
 	}
 
 	public void clear() {
