@@ -44,27 +44,27 @@ public abstract class Turn implements Action {
     }
 
     protected void changeState() {
-        if (shouldStartNextTurn()) {
-            if (setStone()) {
-                resetCoordinates();
-                if (isGameOver()) {
-                    context.setCurrentState(context.getEnd());
-                } else {
-                    nextTurn();
-                }
-            } else {
-                System.out.println(
-                    "[ WARNUNG ] Ungültiger Spielzug! Das Feld bei Spalte " +
-                    (xCoordinate + 1) +
-                    " und Zeile " +
-                    (yCoordinate + 1) +
-                    " ist bereits belegt."
-                );
-                resetCoordinates();
-                changeState();
-            }
+        if (bothCoordinatesSet()) {
+            evaluateCurrentTurn();
         } else {
             context.setCurrentState(this);
+        }
+    }
+
+    private void evaluateCurrentTurn() {
+        final boolean validTurn = setStone();
+        final String messageIfInvalid = MessageFormat.format(
+                "[ WARNUNG ] Ungültiger Spielzug! Das Feld bei Spalte {0} und Zeile {1} ist bereits belegt.",
+                xCoordinate + 1, yCoordinate + 1
+        );
+        resetCoordinates();
+        if (!validTurn) {
+            System.out.println(messageIfInvalid);
+            changeState();
+        } else if (isGameOver()) {
+            context.setCurrentState(context.getEnd());
+        } else {
+            nextTurn();
         }
     }
 
@@ -73,11 +73,8 @@ public abstract class Turn implements Action {
         yCoordinate = null;
     }
 
-    private boolean shouldStartNextTurn() {
-        if (xCoordinate == null || yCoordinate == null) {
-            return false;
-        }
-        return true;
+    private boolean bothCoordinatesSet() {
+        return xCoordinate != null && yCoordinate != null;
     }
 
     private boolean isGameOver() {
