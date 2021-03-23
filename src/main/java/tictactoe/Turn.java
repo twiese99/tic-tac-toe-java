@@ -19,7 +19,7 @@ public abstract class Turn implements Action {
             stringBuilder.append(context.getBoard().toString()).append("\n");
         }
         stringBuilder.append("Bitte ");
-        stringBuilder.append(xCoordinate == null ? "Spalte" : "Reihe");
+        stringBuilder.append(isNewTurn() ? "Spalte" : "Reihe");
         stringBuilder.append(" eingeben. 1 bis 3 erlaubt, ungültige Eingaben => Abbruch");
         return stringBuilder.toString();
     }
