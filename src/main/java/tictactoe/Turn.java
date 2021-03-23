@@ -14,22 +14,14 @@ public abstract class Turn implements Action {
 
     @Override
     public String getScreen() {
-        String result = "";
-
+        final StringBuilder stringBuilder = new StringBuilder();
         if (isNewTurn()) {
-            result += context.getBoard().toString();
-            result += "\n";
+            stringBuilder.append(context.getBoard().toString()).append("\n");
         }
-
-        String wantedCoordinate = "";
-        if (xCoordinate == null) {
-            wantedCoordinate = "Spalte";
-        } else {
-            wantedCoordinate = "Reihe";
-        }
-
-        result += "Bitte " + wantedCoordinate + " eingeben. 1 bis 3 erlaubt, ungültige Eingaben => Abbruch";
-        return result;
+        stringBuilder.append("Bitte ");
+        stringBuilder.append(xCoordinate == null ? "Spalte" : "Reihe");
+        stringBuilder.append(" eingeben. 1 bis 3 erlaubt, ungültige Eingaben => Abbruch");
+        return stringBuilder.toString();
     }
 
     @Override
