@@ -1,5 +1,7 @@
 package tictactoe;
 
+import java.text.MessageFormat;
+
 public abstract class Turn implements Action {
     protected Context context;
 
@@ -34,9 +36,7 @@ public abstract class Turn implements Action {
     public void keyPressed(char c) {
         if (Character.isDigit(c)) {
             int inputCoordinate = Character.getNumericValue(c) - 1;
-            if (isCoordinateInRange(inputCoordinate)) {
-                updateCoordinate(inputCoordinate);
-            }
+            if (Board.isValidXorY(inputCoordinate)) updateCoordinate(inputCoordinate);
         } else {
             resetCoordinates();
         }
@@ -100,7 +100,4 @@ public abstract class Turn implements Action {
 
     protected abstract boolean setStone();
 
-    private boolean isCoordinateInRange(int coordinate) {
-        return (coordinate >= 0 && coordinate <= 2);
-    }
 }
